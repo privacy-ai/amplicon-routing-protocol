@@ -141,10 +141,10 @@ In this example, all this is performed in a single thread (the main thread). In 
 Now, let’s break down the loop shown above into primary components:
 
 
-We read incoming messages using a blocking read method. The method returns a DataPackage object which contains the following properties:
-binary_data_payload - The binary data sent by the client.
-data_transit_configuration - The data transit configuration used by the client’s session to reach the current server endpoint. We can re-use this configuration to send messages back to the client, without knowing any other details regarding the client (such as the client’s IP etc).
-We can create a new out-going DataPackage  with the received DataPackage’s data_transit_configuration. We can then write using the common server session, and the data-package will be routed to the right client.
+- We read incoming messages using a blocking read method. The method returns a DataPackage object which contains the following properties:
+   - binary_data_payload - The binary data sent by the client.
+   - data_transit_configuration - The data transit configuration used by the client’s session to reach the current server endpoint. We can re-use this configuration to send messages back to the client, without knowing any other details regarding the client (such as the client’s IP etc).
+- We can create a new out-going DataPackage  with the received DataPackage’s data_transit_configuration. We can then write using the common server session, and the data-package will be routed to the right client.
 
 
 
