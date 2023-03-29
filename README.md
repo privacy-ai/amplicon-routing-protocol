@@ -120,7 +120,7 @@ session = current_server_endpoint.listen()
 
 Post session establishment, we enter a perpetual loop within which we listen for incoming messages and write back a binary string (such that the source of the message receives it).
 
-
+```
 while True:
       read_data_package = session.read(blocking=True)
       print(read_data_package.binary_data_payload)
@@ -131,7 +131,7 @@ binary_data_payload=b"Response message", data_transit_configuration=read_data_pa
       # respond back to the client node, without knowing any other details 
       # regarding the client.
       session.write(data_package=outgoing_data_package)
-
+```
 
 
 
