@@ -3,10 +3,10 @@
 Amplicon P2P protocol is Skymel’s proprietary one-to-one data transit protocol which possess the following attributes and guarantees:
 1. Each communicating **endpoint** is uniquely identified by a **public-key** (access to messages sent to an **endpoint** are controlled by knowledge of the corresponding **private-key**). Messages in transit are encrypted.
 2. No other information is required/explicitly transmitted to facilitate communication between two nodes.
-- Nodes need not share any information regarding their IP addresses, geolocation etc.
+   - Nodes need not share any information regarding their IP addresses, geolocation etc.
 3. By tuning the transit parameters of an established bidirectional communication session, participating nodes can control two key properties of the network route:
-- Route redundancy (how many different paths exist between the two nodes in real time).
-- Data package max hops to destination (this limits the maximum possible latency).
+   - Route redundancy (how many different paths exist between the two nodes in real time).
+   - Data package max hops to destination (this limits the maximum possible latency).
 
 In this document we will provide code examples detailing a simple client and server communicating over Amplicon P2P network. For more complicated applications, please wait for a full wiki release or get in touch with us.
 
