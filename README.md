@@ -1,16 +1,18 @@
-Overview
+# Overview
 
 Amplicon P2P protocol is Skymel’s proprietary one-to-one data transit protocol which possess the following attributes and guarantees:
-Each communicating endpoint is uniquely identified by a public-key (access to messages sent to an endpoint are controlled by knowledge of the corresponding private-key). Messages in transit are encrypted.
-No other information is required/explicitly transmitted to facilitate communication between two nodes.
-Nodes need not share any information regarding their IP addresses, geolocation etc.
-By tuning the transit parameters of an established bidirectional communication session, participating nodes can control two key properties of the network route:
-Route redundancy (how many different paths exist between the two nodes in real time).
-Data package max hops to destination (this limits the maximum possible latency).
+1. Each communicating endpoint is uniquely identified by a public-key (access to messages sent to an endpoint are controlled by knowledge of the corresponding private-key). Messages in transit are encrypted.
+2. No other information is required/explicitly transmitted to facilitate communication between two nodes.
+- Nodes need not share any information regarding their IP addresses, geolocation etc.
+3. By tuning the transit parameters of an established bidirectional communication session, participating nodes can control two key properties of the network route:
+- Route redundancy (how many different paths exist between the two nodes in real time).
+- Data package max hops to destination (this limits the maximum possible latency).
 
 In this document we will provide code examples detailing a simple client and server communicating over Amplicon P2P network. For more complicated applications, please wait for a full wiki release or get in touch with us.
-Client Example
 
+## Client Example
+
+```
 from skymel.amplicon_network import DataTransitConfigurationError, SessionError
 from skymel.amplicon_network import Endpoint, DataTransitConfiguration
 
@@ -37,7 +39,7 @@ except SessionError as se:
    # is offline).
    print(str(se))
 
-
+```
 
 
 
@@ -46,12 +48,12 @@ remote_endpoint = Endpoint(
 public_key="a104d469a3cdfe5cd79763e00773f92819fef0a9707affc76a01f05a39c0ae2a")
 
 
-Please note, that we do not have any information about the private-key of the remote endpoint, or its IP address etc.
+**Please note, that we do not have any information about the private-key of the remote endpoint, or its IP address etc.**
 
 
 Next we specify a DataTransitConfiguration object with desired network transit parameters, which include (but are not limited to):
-max_hops
-min_redundant_routes, max_redundant_routes
+- max_hops
+- min_redundant_routes, max_redundant_routes
 
 
 Finally, before sending any data-packets, we try to establish a session with the desired DataTransitConfiguration. The session establishment itself may take a few seconds, however once established the bidirectional data transfer is near-instantaneous (depending on the specified max_hops parameter).
@@ -63,8 +65,11 @@ Once the session is established, all the communications to the specific endpoint
 
 
 The read method in particular returns a DataPackage object type. The actual binary data payload can be read from the binary_data_payload property.
-Server Example
 
+## Server Example
+
+
+```
 from skymel.amplicon_network import DataTransitConfigurationError, SessionError
 from skymel.amplicon_network import Endpoint, DataPackage
 
@@ -98,7 +103,7 @@ except SessionError as se:
    # remote endpoint could be found (most likely because remote endpoint
    # is offline).
    print(str(se))
-
+```
 
 
 For a server implementation the major steps are outlined in the following sentences. First, we need to create an Endpoint with the private_key instead of the public_key (the public-key is easily derived from the private-key, but not vice-versa), as shown:
